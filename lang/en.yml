@@ -1,0 +1,8 @@
+en:
+  RoweGroup\ElementalList\Model\ElementList:
+    BlockType: Grid Block
+    PLURALNAME: Grids
+    PLURALS:
+      one: 'A Grid'
+      other: '{count} Grids'
+    SINGULARNAME: Grid
