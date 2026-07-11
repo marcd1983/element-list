@@ -1,5 +1,5 @@
 en:
-  RoweGroup\ElementalList\Model\ElementList:
+  Antlion\ElementList\Model\ElementList:
     BlockType: Grid Block
     PLURALNAME: Grids
     PLURALS:

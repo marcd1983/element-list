@@ -1,9 +1,9 @@
 <?php
 
-namespace Antlion\ElementalList\Extension;
+namespace Antlion\ElementList\Extension;
 
 use DNADesign\Elemental\Models\BaseElement;
-use Antlion\ElementalList\Model\ElementList;
+use Antlion\ElementList\Model\ElementList;
 use SilverStripe\CMS\Controllers\CMSPageEditController;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\Extension;

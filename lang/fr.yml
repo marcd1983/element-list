@@ -1,5 +1,5 @@
 fr:
-  RoweGroup\ElementalList\Model\ElementList:
+  Antlion\ElementList\Model\ElementList:
     BlockType: Liste
     PLURALNAME: listes
     PLURALS:

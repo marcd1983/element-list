@@ -1,5 +1,5 @@
 {
-    "name": "antlion/elemental-list",
+    "name": "antlion/element-list",
     "description": "Adds a new element for nested elements",
     "type": "silverstripe-vendormodule",
     "keywords": ["silverstripe", "element", "elemental", "content blocks"],
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Antlion\\ElementalList\\": "src/"
+            "Antlion\\ElementList\\": "src/"
         }
     }
 }

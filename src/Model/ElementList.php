@@ -1,6 +1,6 @@
 <?php
 
-namespace Antlion\ElementalList\Model;
+namespace Antlion\ElementList\Model;
 
 use DNADesign\Elemental\Models\BaseElement;
 use DNADesign\Elemental\Models\ElementalArea;
