@@ -4,7 +4,7 @@ name: elemental-list
 DNADesign\Elemental\Models\BaseElement:
   extensions:
     - App\Extensions\NestedElementCMSEditLinkExtension
-    # - Antlion\ElementalGrid\Extension\BaseElementCMSEditLinkExtension
+    # - Antlion\ElementList\Extension\BaseElementCMSEditLinkExtension
 
-Antlion\ElementalGrid\Model\ElementalGrid:
+Antlion\ElementList\Model\ElementList:
   inline_editable: false
