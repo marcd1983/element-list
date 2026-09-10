@@ -9,6 +9,7 @@ use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\View\Parsers\URLSegmentFilter;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 
@@ -22,7 +23,9 @@ class ElementList extends BaseElement
 
     private static $db = [
         'Content'         => 'HTMLText',
-        'ColumnCount'     => 'Int',
+        'ColumnCountLarge' => 'Int(4)',
+        'ColumnCountMedium' => 'Int(3)',
+        'ColumnCountSmall' => 'Int(1)',
         'VerticalAlign'   => "Enum('top,middle,bottom','middle')",
         'HorizontalAlign' => "Enum('left,center,right,justify','left')",
         'NoGridSpace'     => 'Boolean',
@@ -70,7 +73,15 @@ class ElementList extends BaseElement
     {
         $fields = parent::getCMSFields();
 
-        $fields->removeByName(['Content', 'ColumnCount', 'VerticalAlign', 'HorizontalAlign', 'NoGridSpace']);
+        $fields->removeByName([
+            'Content',
+            'ColumnCountLarge',
+            'ColumnCountMedium',
+            'ColumnCountSmall',
+            'VerticalAlign',
+            'HorizontalAlign',
+            'NoGridSpace',
+        ]);
 
         // Grab the ElementalArea field added by ElementalAreasExtension so we can reposition it last
         $elementsField = $fields->fieldByName('Root.Main.Elements');
@@ -80,19 +91,25 @@ class ElementList extends BaseElement
 
         $fields->addFieldsToTab('Root.Main', [
             HTMLEditorField::create('Content', 'Content'),
-            DropdownField::create('ColumnCount', 'Columns',
-                array_combine(range(2, 8), array_map('strval', range(2, 8)))
-            )->setEmptyString('- Select columns -'),
-            DropdownField::create('VerticalAlign', 'Vertical alignment', [
-                'top'    => 'Top',
-                'middle' => 'Middle',
-                'bottom' => 'Bottom',
+
+            FieldGroup::create('Columns per row', [
+                $this->columnCountDropdown('ColumnCountLarge', 'Large', 8),
+                $this->columnCountDropdown('ColumnCountMedium', 'Medium', 4),
+                $this->columnCountDropdown('ColumnCountSmall', 'Small', 2),
             ]),
-            DropdownField::create('HorizontalAlign', 'Horizontal alignment', [
-                'left'    => 'Left',
-                'center'  => 'Center',
-                'right'   => 'Right',
-                'justify' => 'Justify',
+
+            FieldGroup::create('Alignment', [
+                DropdownField::create('VerticalAlign', 'Vertical alignment', [
+                    'top'    => 'Top',
+                    'middle' => 'Middle',
+                    'bottom' => 'Bottom',
+                ]),
+                DropdownField::create('HorizontalAlign', 'Horizontal alignment', [
+                    'left'    => 'Left',
+                    'center'  => 'Center',
+                    'right'   => 'Right',
+                    'justify' => 'Justify',
+                ]),
             ]),
             CheckboxField::create('NoGridSpace', 'Remove grid spacing (no gap between cells)'),
         ]);
@@ -105,6 +122,13 @@ class ElementList extends BaseElement
         return $fields;
     }
     
+    private function columnCountDropdown(string $name, string $title, int $max): DropdownField
+    {
+        $options = array_combine(range(1, $max), range(1, $max));
+
+        return DropdownField::create($name, $title, $options);
+    }
+
     public function GetListBlockIdentifier()
     {
         $filter = URLSegmentFilter::create();
@@ -131,25 +155,6 @@ class ElementList extends BaseElement
             'justify' => 'align-justify',
             default   => '',
         };
-    }
-
-    public function GetSmallBreakpointColumnCount()
-    {
-        return '1';
-    }
-
-    public function GetMediumBreakpointColumnCount()
-    {
-        switch($this->ColumnCount) {
-            case 2: return 2;
-            case 3: return 2;
-            case 4: return 2;
-            case 5: return 3;
-            case 6: return 3;
-            case 7: return 4;
-            case 8: return 4;
-        }
-        return '1';
     }
 
     public function getSummary(): string

@@ -11,7 +11,7 @@
 		
 	<% end_if %>
 
-	<div class="list-element__grid element grid-x <% if not $NoGridSpace %>grid-margin-x grid-margin-y<% end_if %> small-up-2 medium-up-{$MediumBreakpointColumnCount} large-up-{$ColumnCount} {$VerticalAlignClass} {$HorizontalAlignClass}" data-listelement-count="$Elements.Elements.Count">
+	<div class="list-element__grid element grid-x <% if not $NoGridSpace %>grid-margin-x grid-margin-y<% end_if %> small-up-{$ColumnCountSmall} medium-up-{$ColumnCountMedium} large-up-{$ColumnCountLarge} {$VerticalAlignClass} {$HorizontalAlignClass}" data-listelement-count="$Elements.Elements.Count">
 		<% loop $Elements.Elements %>
 			<div class="list-element_block cell">{$Me}</div>
 		<% end_loop %>
