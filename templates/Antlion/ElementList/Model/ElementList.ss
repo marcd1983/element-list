@@ -1,5 +1,5 @@
 	
-<% cached $ID, $LastEdited, $Elements.Elements.Count, $Elements.Elements.Max('LastEdited') %>
+<%-- <% cached $ID, $LastEdited, $Elements.Elements.Count, $Elements.Elements.Max('LastEdited') %> --%>
 	<% if $ShowTitle %>
 	<h2 class="element-title">$Title</h2>
 	<% end_if %>
@@ -16,4 +16,4 @@
 			<div class="list-element_block cell">{$Me}</div>
 		<% end_loop %>
 	</div>
-<% end_cached %>
+<%-- <% end_cached %> --%>
